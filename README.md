@@ -22,13 +22,51 @@ Mon Siège à Rêve is a cinema booking application that allows users to reserve
 
 1. Clone the repository:
 
+```bash
 git clone https://github.com/your-username/mon-siege-a-reve.git
 cd mon-siege-a-reve
-
+```
 
 2. Backend (Django - API):
 
 
+- Apply the database migrations:
+
+```bash
+python manage.py migrate
+```
+
+- Create a superuser for accessing the Django admin:
+
+```bash
+python manage.py createsuperuser
+```
+
+- Run the development server:
+
+```bash
+python manage.py runserver
+```
+
+3. Frontend (React - Frontend):
+
+- Open a new terminal and navigate to the `frontend` directory:
+
+```bash
+cd frontend
+```
+
+- Install the required Node.js packages:
+
+```bash
+npm install
+```
+
+- Run the React development server:
+
+```bash
+npm start
+```
 
 4. Access the app:
 
