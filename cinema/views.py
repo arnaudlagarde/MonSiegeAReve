@@ -1,17 +1,14 @@
 # views.py
 
-from django.shortcuts import get_object_or_404
+from rest_framework.generics import CreateAPIView
+from django.contrib.auth.models import User
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import Movie, Session, SpecialSession, Reservation
 from .serializers import MovieSerializer, SessionSerializer, SpecialSessionSerializer, ReservationSerializer, UserSerializer
 from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
-from django.contrib.auth.models import User
 
 
 class MovieAPIView(APIView):
@@ -52,11 +49,6 @@ def reserve_seat(request):
         return Response({'message': 'Not enough available seats'}, status=400)
 
 
-@api_view(['POST'])
-@permission_classes([AllowAny])  # Permet à tout le monde de créer un utilisateur, pas besoin d'être connecté
-def signup(request):
-    serializer = UserSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()  # Sauvegarde l'utilisateur dans la base de données
-        return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class UserCreateAPIView(CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

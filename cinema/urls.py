@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import MovieAPIView, SessionAPIView, SpecialSessionAPIView, reserve_seat
+from .views import MovieAPIView, SessionAPIView, SpecialSessionAPIView, UserCreateAPIView, reserve_seat
 
 urlpatterns = [
     path('api/movies/', MovieAPIView.as_view(), name='movies-list'),
