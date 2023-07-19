@@ -1,5 +1,3 @@
-// SignUp.js
-
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -27,25 +25,25 @@ const SignUp = () => {
   };
 
   return (
-    <div>
-      <h2>Créer un compte</h2>
+    <div className="container mt-5">
+      <h2 className="mb-4">Créer un compte</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nom d'utilisateur :</label>
-          <input type="text" name="username" value={formData.username} onChange={handleChange} />
+        <div className="mb-3">
+          <label htmlFor="username" className="form-label">Nom d'utilisateur:</label>
+          <input type="text" className="form-control" id="username" name="username" value={formData.username} onChange={handleChange} />
         </div>
-        <div>
-          <label>Mot de passe :</label>
-          <input type="password" name="password" value={formData.password} onChange={handleChange} />
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">Mot de passe:</label>
+          <input type="password" className="form-control" id="password" name="password" value={formData.password} onChange={handleChange} />
         </div>
-        <div>
-          <label>Administrateur :</label>
-          <select name="isAdmin" value={formData.isAdmin} onChange={handleChange}>
+        <div className="mb-3">
+          <label htmlFor="isAdmin" className="form-label">Administrateur:</label>
+          <select className="form-select" id="isAdmin" name="isAdmin" value={formData.isAdmin} onChange={handleChange}>
             <option value="yes">Oui</option>
             <option value="no">Non</option>
           </select>
         </div>
-        <button type="submit">S'inscrire</button>
+        <button type="submit" className="btn btn-primary">S'inscrire</button>
       </form>
     </div>
   );
