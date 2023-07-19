@@ -8,6 +8,7 @@ import Reservation from './components/Reservation';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
 import MovieSessionsPage from './components/MovieSessionsPage';
+import MovieForm from './components/MovieForm';
 import axios, { getAuthToken, setAuthToken } from './api'; // Import setAuthToken as a named import
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/moviesessions" element={<MovieSessionsPage />} />
+          <Route path="/add-movie" element={<MovieForm />} />
         </Routes>
       </Container>
 
