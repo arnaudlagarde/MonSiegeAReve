@@ -1,12 +1,17 @@
-// Home.js
-
 import React from 'react';
+import { Container } from 'react-bootstrap';
+import NavBar from './Navbar';
+import Footer from './Footer';
 
 const Home = () => {
   return (
     <div>
-      <h1>Cinéma "Mon Siège à rêve"</h1>
-      {/* Contenu de la page d'accueil */}
+      <NavBar />
+      <Container>
+        <h1>Welcome to "Mon Siège à rêve" Cinema</h1>
+        {/* Add more content for the homepage here */}
+      </Container>
+      <Footer />
     </div>
   );
 };
