@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import api from '../api'; // Import your custom api.js file
+import api from '../api'; // Import api.js
 import { Form, Button, Row, Col, Container, Alert } from 'react-bootstrap';
 
 const Reservation = () => {
@@ -18,7 +18,7 @@ const Reservation = () => {
 
   const fetchMovies = async () => {
     try {
-      const response = await api.get('/api/movies/');
+      const response = await api.get('/api/movies/'); // Use api.get instead of axios.get
       setMovies(response.data);
     } catch (error) {
       console.error('Error fetching movies:', error);
@@ -27,7 +27,7 @@ const Reservation = () => {
 
   const fetchSessions = async () => {
     try {
-      const response = await api.get('/api/sessions/');
+      const response = await api.get('/api/sessions/'); // Use api.get instead of axios.get
       setSessions(response.data);
     } catch (error) {
       console.error('Error fetching regular sessions:', error);
@@ -36,7 +36,7 @@ const Reservation = () => {
 
   const fetchSpecialSessions = async () => {
     try {
-      const response = await api.get('/api/special_sessions/');
+      const response = await api.get('/api/special_sessions/'); // Use api.get instead of axios.get
       setSpecialSessions(response.data);
     } catch (error) {
       console.error('Error fetching special sessions:', error);
@@ -50,7 +50,7 @@ const Reservation = () => {
     }
 
     try {
-      const response = await api.post('/api/reserve/', {
+      const response = await api.post('/api/reserve/', { // Use api.post instead of axios.post
         session_id: selectedSession,
         seats: seatsRequested,
       });
@@ -60,11 +60,7 @@ const Reservation = () => {
       fetchSessions();
       fetchSpecialSessions();
     } catch (error) {
-      if (error.response && error.response.status === 400) {
-        setMessage('Not enough available seats. Please try again.');
-      } else {
-        setMessage('Unable to reserve seats. An error occurred.');
-      }
+      setMessage('Unable to reserve seats. Check available seats.');
     }
   };
 
@@ -79,12 +75,12 @@ const Reservation = () => {
               <option value="">Choose a session</option>
               {sessions.map((session) => (
                 <option key={session.id} value={session.id}>
-                  {session.movie.title} - {session.date} {session.time}
+                  {session.movie.title} - {session.date} {session.start_time}
                 </option>
               ))}
               {specialSessions.map((session) => (
                 <option key={session.id} value={session.id}>
-                  {session.movie} - {session.date} {session.time}
+                  {session.movie} - {session.date} {session.start_time}
                 </option>
               ))}
             </Form.Control>

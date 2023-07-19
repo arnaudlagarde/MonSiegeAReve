@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import Reservation from './components/Reservation';
 import SignUp from './components/SignUp';
+import SignIn from './components/SignIn';
 import axios, { setAuthToken, getAuthToken } from './api'; // Import api.js
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/reservation" element={<Reservation />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
         </Routes>
       </Container>
 
