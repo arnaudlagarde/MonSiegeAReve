@@ -75,12 +75,12 @@ const Reservation = () => {
               <option value="">Choose a session</option>
               {sessions.map((session) => (
                 <option key={session.id} value={session.id}>
-                  {session.movie.title} - {session.date} {session.time}
+                  {session.movie.title} - {session.date} {session.start_time}
                 </option>
               ))}
               {specialSessions.map((session) => (
                 <option key={session.id} value={session.id}>
-                  {session.movie} - {session.date} {session.time}
+                  {session.movie} - {session.date} {session.start_time}
                 </option>
               ))}
             </Form.Control>
