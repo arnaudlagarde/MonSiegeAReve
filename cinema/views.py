@@ -1,5 +1,3 @@
-# views.py
-
 from rest_framework.generics import CreateAPIView
 from django.contrib.auth.models import User
 from rest_framework.views import APIView
@@ -9,6 +7,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import Movie, Session, SpecialSession, Reservation
 from .serializers import MovieSerializer, SessionSerializer, SpecialSessionSerializer, ReservationSerializer, UserSerializer
 from rest_framework import status
+from django.shortcuts import get_object_or_404
 
 
 class MovieAPIView(APIView):
@@ -40,7 +39,8 @@ def reserve_seat(request):
 
     session = get_object_or_404(Session, pk=session_id)
     if session.available_seats >= seats_requested:
-        reservation = Reservation(user=request.user, session=session, seats=seats_requested)
+        reservation = Reservation(
+            user=request.user, session=session, seats=seats_requested)
         reservation.save()
         session.available_seats -= seats_requested
         session.save()
@@ -49,6 +49,12 @@ def reserve_seat(request):
         return Response({'message': 'Not enough available seats'}, status=400)
 
 
-class UserCreateAPIView(CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+# The modified view for user creation
+@api_view(['POST'])
+@permission_classes([AllowAny])  # Allow anyone to sign up
+def user_create(request):
+    serializer = UserSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

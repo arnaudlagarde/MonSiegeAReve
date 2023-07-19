@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import MovieAPIView, SessionAPIView, SpecialSessionAPIView, UserCreateAPIView, reserve_seat
+from .views import MovieAPIView, SessionAPIView, SpecialSessionAPIView, user_create, reserve_seat
 from rest_framework.authtoken.views import obtain_auth_token  # Import token view
 
 urlpatterns = [
@@ -8,7 +8,8 @@ urlpatterns = [
     path('api/special_sessions/', SpecialSessionAPIView.as_view(),
          name='special-sessions-list'),
     path('api/reserve/', reserve_seat, name='reserve-seat'),
-    path('api/signup/', UserCreateAPIView.as_view(), name='user-create'),
+    # Use the user_create function
+    path('api/signup/', user_create, name='user-create'),
     # Token authentication view
     path('api/token/', obtain_auth_token, name='api-token'),
 ]

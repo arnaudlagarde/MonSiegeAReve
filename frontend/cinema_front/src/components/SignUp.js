@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from '../api'; // Import the updated api.js file
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -16,7 +16,22 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/signup/', formData);
+      // Convert form data to JSON format
+      const jsonData = JSON.stringify(formData);
+
+      const response = await axios.post('/api/signup/', jsonData, {
+        headers: {
+          'Content-Type': 'application/json', // Set the content type to JSON
+        },
+      });
+
+      // Retrieve the authentication token from the response
+      const token = response.data.token;
+
+      // Save the token to localStorage or cookies (use appropriate method)
+      // Example using localStorage:
+      localStorage.setItem('authToken', token);
+
       console.log('User registered:', response.data);
       // You can redirect to a different page here after successful registration
     } catch (error) {
@@ -25,25 +40,25 @@ const SignUp = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <h2 className="mb-4">Créer un compte</h2>
+    <div>
+      <h2>Créer un compte</h2>
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="username" className="form-label">Nom d'utilisateur:</label>
-          <input type="text" className="form-control" id="username" name="username" value={formData.username} onChange={handleChange} />
+        <div>
+          <label>Nom d'utilisateur :</label>
+          <input type="text" name="username" value={formData.username} onChange={handleChange} />
         </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">Mot de passe:</label>
-          <input type="password" className="form-control" id="password" name="password" value={formData.password} onChange={handleChange} />
+        <div>
+          <label>Mot de passe :</label>
+          <input type="password" name="password" value={formData.password} onChange={handleChange} />
         </div>
-        <div className="mb-3">
-          <label htmlFor="isAdmin" className="form-label">Administrateur:</label>
-          <select className="form-select" id="isAdmin" name="isAdmin" value={formData.isAdmin} onChange={handleChange}>
+        <div>
+          <label>Administrateur :</label>
+          <select name="isAdmin" value={formData.isAdmin} onChange={handleChange}>
             <option value="yes">Oui</option>
             <option value="no">Non</option>
           </select>
         </div>
-        <button type="submit" className="btn btn-primary">S'inscrire</button>
+        <button type="submit">S'inscrire</button>
       </form>
     </div>
   );

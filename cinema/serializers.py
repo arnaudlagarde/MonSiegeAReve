@@ -26,16 +26,19 @@ class ReservationSerializer(serializers.ModelSerializer):
         model = Reservation
         fields = '__all__'
 
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'password', 'is_staff']
-        extra_kwargs = {'password': {'write_only': True}}  # Pour que le mot de passe ne soit pas inclus dans les réponses API
+        # To exclude the password field from API responses
+        extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
         user = User.objects.create_user(
             username=validated_data['username'],
             password=validated_data['password'],
-            is_staff=validated_data.get('is_staff', False)  # Par défaut, l'utilisateur n'est pas administrateur
+            # By default, the user is not an administrator
+            is_staff=validated_data.get('is_staff', False)
         )
         return user
