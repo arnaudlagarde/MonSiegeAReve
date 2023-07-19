@@ -1,8 +1,9 @@
 from django.urls import path
-from . import views
+from .views import MovieAPIView, SessionAPIView, SpecialSessionAPIView, reserve_seat
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('reserve/<int:session_id>/', views.reserve_seat, name='reserve'),
-    path('history/', views.user_history, name='history'),
+    path('api/movies/', MovieAPIView.as_view(), name='movies-list'),
+    path('api/sessions/', SessionAPIView.as_view(), name='sessions-list'),
+    path('api/special_sessions/', SpecialSessionAPIView.as_view(), name='special-sessions-list'),
+    path('api/reserve/', reserve_seat, name='reserve-seat'),
 ]
