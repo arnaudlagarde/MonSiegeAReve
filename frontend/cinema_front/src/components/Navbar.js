@@ -13,6 +13,7 @@ const CustomNavbar = () => {
                     <Nav.Link as={Link} to="/reservation">Réserver des places</Nav.Link>
                     <Nav.Link as={Link} to="/signup">S'inscrire</Nav.Link>
                     <Nav.Link as={Link} to="/signin">Se connecter</Nav.Link>
+                    <Nav.Link as={Link} to="/moviesessions">Movie Sessions</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

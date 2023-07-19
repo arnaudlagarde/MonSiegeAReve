@@ -1,4 +1,5 @@
 from django.urls import path
+from . import views
 from .views import MovieAPIView, SessionAPIView, SpecialSessionAPIView, user_create, reserve_seat
 from rest_framework.authtoken.views import obtain_auth_token  # Import token view
 
@@ -12,4 +13,5 @@ urlpatterns = [
     path('api/signup/', user_create, name='user-create'),
     # Token authentication view
     path('api/token/', obtain_auth_token, name='api-token'),
+    path('api/csrf/', views.get_csrf_token, name='get_csrf_token'),
 ]

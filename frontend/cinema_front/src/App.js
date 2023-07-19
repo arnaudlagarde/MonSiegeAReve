@@ -7,7 +7,8 @@ import Home from './components/Home';
 import Reservation from './components/Reservation';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
-import axios, { setAuthToken, getAuthToken } from './api'; // Import api.js
+import MovieSessionsPage from './components/MovieSessionsPage';
+import axios, { getAuthToken, setAuthToken } from './api'; // Import setAuthToken as a named import
 
 const App = () => {
   useEffect(() => {
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/reservation" element={<Reservation />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/moviesessions" element={<MovieSessionsPage />} />
         </Routes>
       </Container>
 

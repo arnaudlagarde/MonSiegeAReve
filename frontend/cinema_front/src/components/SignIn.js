@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import { Form, Button, Container, Alert } from 'react-bootstrap';
 import api from '../api'; // Import api.js
 
 const SignIn = () => {
-    const navigate = useNavigate(); // Use useNavigate to navigate to different pages
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: '',
         password: '',
@@ -19,12 +19,12 @@ const SignIn = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await api.post('/api/token/', formData);
+            const response = await api.post('/api/token/', formData); // Use api.post instead of axios.post
             const token = response.data.token;
             localStorage.setItem('authToken', token);
-            api.setAuthToken(token);
+            api.setAuthToken(token); // Set the authentication token for subsequent requests
             setMessage('Sign in successful!');
-            // Use navigate to redirect to the reservation page after successful sign-in
+            // Navigate to the reservation page or any other page you'd like after successful sign-in
             navigate('/reservation');
         } catch (error) {
             setMessage('Invalid credentials. Please try again.');

@@ -8,6 +8,15 @@ from .models import Movie, Session, SpecialSession, Reservation
 from .serializers import MovieSerializer, SessionSerializer, SpecialSessionSerializer, ReservationSerializer, UserSerializer
 from rest_framework import status
 from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
+from django.middleware.csrf import get_token
+
+
+def get_csrf_token(request):
+    # Fetch the CSRF token using the get_token function
+    csrf_token = get_token(request)
+    # Return the CSRF token in a JSON response
+    return JsonResponse({'csrfToken': csrf_token})
 
 
 class MovieAPIView(APIView):
@@ -18,6 +27,9 @@ class MovieAPIView(APIView):
 
 
 class SessionAPIView(APIView):
+    # Allow any (unauthenticated) user to access the session list
+    permission_classes = [AllowAny]
+
     def get(self, request):
         sessions = Session.objects.all()
         serializer = SessionSerializer(sessions, many=True)
