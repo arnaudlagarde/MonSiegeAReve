@@ -1,20 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
 
-const NavBar = () => {
+const CustomNavbar = () => {
     return (
         <Navbar bg="dark" variant="dark" expand="lg">
-            <Navbar.Brand href="/">Cinéma "Mon Siège à rêve"</Navbar.Brand>
-            <Navbar.Toggle aria-controls="navbar" />
-            <Navbar.Collapse id="navbar">
-                <Nav className="ml-auto">
-                    <Nav.Link href="/">Accueil</Nav.Link>
-                    <Nav.Link href="/reservation">Réserver des places</Nav.Link>
-                    <Nav.Link href="/signup">S'inscrire</Nav.Link>
+            <Navbar.Brand as={Link} to="/">Cinéma "Mon Siège à rêve"</Navbar.Brand>
+            <Navbar.Toggle aria-controls="navbar-nav" />
+            <Navbar.Collapse id="navbar-nav">
+                <Nav className="mr-auto">
+                    <Nav.Link as={Link} to="/">Accueil</Nav.Link>
+                    <Nav.Link as={Link} to="/reservation">Réserver des places</Nav.Link>
+                    <Nav.Link as={Link} to="/signup">S'inscrire</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
     );
 };
 
-export default NavBar;
+export default CustomNavbar;
