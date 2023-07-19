@@ -4,6 +4,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './components/Home';
 import Reservation from './components/Reservation';
+import SignUp from './components/SignUp'; // Importer le composant SignUp
 
 const App = () => {
   return (
@@ -17,6 +18,9 @@ const App = () => {
             <li>
               <Link to="/reservation">Réserver des places</Link>
             </li>
+            <li>
+              <Link to="/signup">S'inscrire</Link> {/* Lien vers la page d'inscription */}
+            </li>
           </ul>
         </nav>
 
@@ -25,6 +29,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/reservation" element={<Reservation />} />
+          <Route path="/signup" element={<SignUp />} /> {/* Route pour la page d'inscription */}
         </Routes>
       </div>
     </Router>

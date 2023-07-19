@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.contrib.auth.models import User
 from .models import Movie, Session, SpecialSession, Reservation
 
 
@@ -24,3 +25,17 @@ class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservation
         fields = '__all__'
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'password', 'is_staff']
+        extra_kwargs = {'password': {'write_only': True}}  # Pour que le mot de passe ne soit pas inclus dans les réponses API
+
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            username=validated_data['username'],
+            password=validated_data['password'],
+            is_staff=validated_data.get('is_staff', False)  # Par défaut, l'utilisateur n'est pas administrateur
+        )
+        return user
