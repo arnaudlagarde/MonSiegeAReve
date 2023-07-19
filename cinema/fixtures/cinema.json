@@ -1,0 +1,62 @@
+[
+    {
+        "model": "cinema.movie",
+        "pk": 1,
+        "fields": {
+            "title": "Avengers: Endgame",
+            "description": "The Avengers must assemble once more to undo the actions of Thanos and restore order to the universe.",
+            "price": "12.50",
+            "image": "https://example.com/avengers_endgame.jpg"
+        }
+    },
+    {
+        "model": "cinema.movie",
+        "pk": 2,
+        "fields": {
+            "title": "The Shawshank Redemption",
+            "description": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+            "price": "12.50",
+            "image": "https://example.com/the_shawshank_redemption.jpg"
+        }
+    },
+    {
+        "model": "cinema.movie",
+        "pk": 30,
+        "fields": {
+            "title": "Inception",
+            "description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+            "price": "12.50",
+            "image": "https://example.com/inception.jpg"
+        }
+    },
+    {
+        "model": "cinema.session",
+        "pk": 1,
+        "fields": {
+            "movie": 1,
+            "date": "2023-07-25",
+            "time": "18:00:00",
+            "available_seats": 100
+        }
+    },
+    {
+        "model": "cinema.session",
+        "pk": 2,
+        "fields": {
+            "movie": 2,
+            "date": "2023-07-26",
+            "time": "19:30:00",
+            "available_seats": 120
+        }
+    },
+    {
+        "model": "cinema.session",
+        "pk": 30,
+        "fields": {
+            "movie": 30,
+            "date": "2023-08-15",
+            "time": "20:00:00",
+            "available_seats": 80
+        }
+    }
+]
