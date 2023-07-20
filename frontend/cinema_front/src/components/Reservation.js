@@ -29,6 +29,9 @@ const Reservation = () => {
     fetchMovies();
     fetchSessions();
     fetchSpecialSessions();
+  }, []);
+
+  useEffect(() => {
     fetchMoviesData();
   }, [fetchMoviesData]);
 
