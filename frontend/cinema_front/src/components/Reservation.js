@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import api from '../api'; // Import api.js
 import { Form, Button, Row, Col, Container, Alert } from 'react-bootstrap';
 
@@ -9,12 +9,29 @@ const Reservation = () => {
   const [selectedSession, setSelectedSession] = useState('');
   const [seatsRequested, setSeatsRequested] = useState(1);
   const [message, setMessage] = useState('');
+  const [moviesData, setMoviesData] = useState([]); // State to store the movie data associated with each session
+
+  const fetchMoviesData = useCallback(async () => {
+    try {
+      const moviesData = await Promise.all(
+        sessions.map(async (session) => {
+          const movie = movies.find((movie) => movie.id === session.movie);
+          return movie ? movie.title : '';
+        })
+      );
+      setMoviesData(moviesData);
+    } catch (error) {
+      console.error('Error fetching movies data:', error);
+    }
+  }, [sessions, movies]);
+
 
   useEffect(() => {
     fetchMovies();
     fetchSessions();
     fetchSpecialSessions();
-  }, []);
+    fetchMoviesData();
+  }, [fetchMoviesData]);
 
   const fetchMovies = async () => {
     try {
@@ -24,6 +41,7 @@ const Reservation = () => {
       console.error('Error fetching movies:', error);
     }
   };
+
 
   const fetchSessions = async () => {
     try {
@@ -73,21 +91,27 @@ const Reservation = () => {
             <Form.Label>Select a session:</Form.Label>
             <Form.Control as="select" onChange={(e) => setSelectedSession(e.target.value)}>
               <option value="">Choose a session</option>
-              {sessions.map((session) => (
+              {sessions.map((session, index) => (
                 <option key={session.id} value={session.id}>
-                  {session.movie.title} - {session.date} {session.start_time}
+                  {/* Use moviesData[index] to access the movie title */}
+                  {moviesData[index]} - {session.date} {session.time}
                 </option>
               ))}
               {specialSessions.map((session) => (
                 <option key={session.id} value={session.id}>
-                  {session.movie} - {session.date} {session.start_time}
+                  {session.movie} - {session.date} {session.time}
                 </option>
               ))}
             </Form.Control>
           </Form.Group>
           <Form.Group>
             <Form.Label>Number of seats:</Form.Label>
-            <Form.Control type="number" min="1" value={seatsRequested} onChange={(e) => setSeatsRequested(e.target.value)} />
+            <Form.Control
+              type="number"
+              min="1"
+              value={seatsRequested}
+              onChange={(e) => setSeatsRequested(e.target.value)}
+            />
           </Form.Group>
           <Button variant="primary" onClick={handleReservation}>
             Reserve

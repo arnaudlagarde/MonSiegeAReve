@@ -36,7 +36,7 @@ class SpecialSession(models.Model):
 class Reservation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     session = models.ForeignKey(Session, on_delete=models.CASCADE)
-    seats = models.PositiveIntegerField(default=1)
+    seats = models.PositiveIntegerField(default=100)
 
     def __str__(self):
         return f"{self.user.username} - {self.session.movie.title} - {self.seats} seat(s)"

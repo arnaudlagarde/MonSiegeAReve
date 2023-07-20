@@ -56,6 +56,9 @@ class SessionAPIView(APIView):
 
 
 class SpecialSessionAPIView(APIView):
+     # Allow any (unauthenticated) user to access the session list
+    permission_classes = [AllowAny]
+    
     def get(self, request):
         special_sessions = SpecialSession.objects.all()
         serializer = SpecialSessionSerializer(special_sessions, many=True)
