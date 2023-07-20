@@ -38,10 +38,7 @@ const Home = () => {
           <Col md={6} className="my-4">
             <h2>About Our Cinema</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla auctor mauris ac nulla pellentesque, vel
-              facilisis tortor fermentum. Sed id venenatis nisl. Suspendisse ullamcorper libero nec interdum tristique.
-              Suspendisse ut lectus id lorem maximus blandit. Fusce iaculis lorem ut enim consectetur, vel fermentum
-              sapien luctus.
+              Vivez l'expérience cinéma ultime au cinéma Mon Siège à Rêve ! Confort, immersion, soirées à thème... Réservez vos sièges dès maintenant !
             </p>
             <Button variant="primary" href="/about">
               Learn More
