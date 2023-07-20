@@ -22,10 +22,16 @@ const SignIn = () => {
             const response = await api.post('/api/token/', formData); // Use api.post instead of axios.post
             const token = response.data.token;
             localStorage.setItem('authToken', token);
-            api.setAuthToken(token); // Set the authentication token for subsequent requests
+
+            // Now fetch the user information using the token
+            const userResponse = await api.get('/api/user/'); // Assuming the endpoint returns the user information
+            const user = userResponse.data;
+            localStorage.setItem('username', user.username);
+            localStorage.setItem('is_staff', user.is_staff);
+            console.log('cest connecté!');
             setMessage('Sign in successful!');
-            // Navigate to the reservation page or any other page you'd like after successful sign-in
-            navigate('/reservation');
+            
+            navigate('/');
         } catch (error) {
             setMessage('Invalid credentials. Please try again.');
         }

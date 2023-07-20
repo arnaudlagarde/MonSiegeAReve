@@ -2,7 +2,7 @@ from rest_framework.generics import CreateAPIView
 from django.contrib.auth.models import User
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view,authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import Movie, Session, SpecialSession, Reservation
 from .serializers import MovieSerializer, SessionSerializer, SpecialSessionSerializer, ReservationSerializer, UserSerializer
@@ -10,6 +10,7 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
+from rest_framework.authentication import TokenAuthentication
 
 
 def get_csrf_token(request):
@@ -88,3 +89,15 @@ def user_create(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+def get_user(request):
+    if request.user.is_authenticated:
+        # Récupérer l'utilisateur actuellement connecté
+        user = request.user
+        # Serializer l'utilisateur pour renvoyer ses informations
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+    else:
+        return Response({'detail': 'User not authenticated.'}, status=401)

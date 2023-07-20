@@ -13,5 +13,6 @@ urlpatterns = [
     path('api/signup/', user_create, name='user-create'),
     # Token authentication view
     path('api/token/', obtain_auth_token, name='api-token'),
+    path('api/user/', views.get_user, name='get-user'),
     path('api/csrf/', views.get_csrf_token, name='get_csrf_token'),
 ]
