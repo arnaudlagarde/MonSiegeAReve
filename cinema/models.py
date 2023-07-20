@@ -17,7 +17,7 @@ class Session(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     date = models.DateField()
     time = models.TimeField()
-    available_seats = models.PositiveIntegerField(default=0)
+    available_seats = models.PositiveIntegerField(default=100)
 
     def __str__(self):
         return f"{self.movie.title} - {self.date} {self.time}"

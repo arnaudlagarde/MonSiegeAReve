@@ -21,7 +21,7 @@ def get_csrf_token(request):
 
 class MovieAPIView(APIView):
     #temporaire pour les tests, besoin du token d'authentification autrement, à retirer après les tests
-    #permission_classes = [AllowAny]
+    permission_classes = [AllowAny]
 
 
     def get(self, request):
@@ -45,6 +45,13 @@ class SessionAPIView(APIView):
         sessions = Session.objects.all()
         serializer = SessionSerializer(sessions, many=True)
         return Response(serializer.data)
+    
+    def post(self, request):
+        serializer = SessionSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class SpecialSessionAPIView(APIView):

@@ -23,8 +23,8 @@ const App = () => {
   return (
     <Router>
       <CustomNavbar />
-
-      <Container className="my-4">
+      <div className="d-flex flex-column" style={{ minHeight: '160vh' }}>
+      <Container className="flex-grow-1 my-4">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/reservation" element={<Reservation />} />
@@ -36,6 +36,7 @@ const App = () => {
       </Container>
 
       <Footer />
+      </div>
     </Router>
   );
 };
