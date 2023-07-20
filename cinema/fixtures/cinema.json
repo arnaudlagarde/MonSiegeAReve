@@ -30,6 +30,46 @@
         }
     },
     {
+        "model": "cinema.movie",
+        "pk": 12,
+        "fields": {
+            "title": "The Dark Knight",
+            "description": "Batman faces the Joker, a criminal mastermind, in a battle to save Gotham City.",
+            "price": "12.50",
+            "image": "https://example.com/dark_knight.jpg"
+        }
+    },
+    {
+        "model": "cinema.movie",
+        "pk": 13,
+        "fields": {
+            "title": "Avatar",
+            "description": "A marine on an alien planet becomes torn between following orders and protecting the world he feels is his home.",
+            "price": "12.50",
+            "image": "https://example.com/avatar.jpg"
+        }
+    },
+    {
+        "model": "cinema.session",
+        "pk": 10,
+        "fields": {
+            "movie": 12,
+            "date": "2023-09-01",
+            "time": "18:30:00",
+            "available_seats": 100
+        }
+    },
+    {
+        "model": "cinema.session",
+        "pk": 11,
+        "fields": {
+            "movie": 13,
+            "date": "2023-09-02",
+            "time": "19:00:00",
+            "available_seats": 120
+        }
+    },
+    {
         "model": "cinema.session",
         "pk": 1,
         "fields": {

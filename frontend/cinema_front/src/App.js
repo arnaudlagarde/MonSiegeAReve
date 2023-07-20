@@ -24,18 +24,16 @@ const App = () => {
     <Router>
       <CustomNavbar />
       <div className="d-flex flex-column" style={{ minHeight: '160vh' }}>
-      <Container className="flex-grow-1 my-4">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/reservation" element={<Reservation />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/moviesessions" element={<MovieSessionsPage />} />
-          <Route path="/add-movie" element={<MovieForm />} />
-        </Routes>
-      </Container>
-
-      <Footer />
+        <Container className="flex-grow-1 my-4">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/reservation" element={<Reservation />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/moviesessions" element={<MovieSessionsPage />} />
+            <Route path="/add-movie" element={<MovieForm />} />
+          </Routes>
+        </Container>
       </div>
     </Router>
   );

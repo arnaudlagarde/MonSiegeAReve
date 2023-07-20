@@ -1,0 +1,182 @@
+[
+    {
+        "model": "cinema.movie",
+        "pk": 4,
+        "fields": {
+            "title": "Star Wars: Episode IV - A New Hope",
+            "description": "The original Star Wars movie that started it all.",
+            "price": "12.50",
+            "image": "https://example.com/star_wars_a_new_hope.jpg"
+        }
+    },
+    {
+        "model": "cinema.movie",
+        "pk": 5,
+        "fields": {
+            "title": "Star Wars: Episode V - The Empire Strikes Back",
+            "description": "The Rebels face the Imperial forces in this action-packed sequel.",
+            "price": "12.50",
+            "image": "https://example.com/star_wars_empire_strikes_back.jpg"
+        }
+    },
+    {
+        "model": "cinema.movie",
+        "pk": 6,
+        "fields": {
+            "title": "Star Wars: Episode VI - Return of the Jedi",
+            "description": "The final showdown between the Rebels and the Empire.",
+            "price": "12.50",
+            "image": "https://example.com/star_wars_return_of_the_jedi.jpg"
+        }
+    },
+    {
+        "model": "cinema.movie",
+        "pk": 3,
+        "fields": {
+            "title": "Star Wars: Episode I - The Phantom Menace",
+            "description": "The beginning of the Star Wars saga with the discovery of Anakin Skywalker.",
+            "price": "12.50",
+            "image": "https://example.com/star_wars_phantom_menace.jpg"
+        }
+    },
+    {
+        "model": "cinema.movie",
+        "pk": 4,
+        "fields": {
+            "title": "Star Wars: Episode II - Attack of the Clones",
+            "description": "Anakin Skywalker becomes a Jedi Knight and falls in love with Padmé Amidala.",
+            "price": "12.50",
+            "image": "https://example.com/star_wars_attack_of_the_clones.jpg"
+        }
+    },
+    {
+        "model": "cinema.movie",
+        "pk": 5,
+        "fields": {
+            "title": "Star Wars: Episode III - Revenge of the Sith",
+            "description": "The rise of Darth Vader and the fall of the Jedi Order.",
+            "price": "12.50",
+            "image": "https://example.com/star_wars_revenge_of_the_sith.jpg"
+        }
+    },
+    {
+        "model": "cinema.movie",
+        "pk": 6,
+        "fields": {
+            "title": "Star Wars: Episode IV - A New Hope",
+            "description": "The original Star Wars movie that started it all.",
+            "price": "12.50",
+            "image": "https://example.com/star_wars_a_new_hope.jpg"
+        }
+    },
+    {
+        "model": "cinema.movie",
+        "pk": 7,
+        "fields": {
+            "title": "Star Wars: Episode V - The Empire Strikes Back",
+            "description": "The Rebels face the Imperial forces in this action-packed sequel.",
+            "price": "12.50",
+            "image": "https://example.com/star_wars_empire_strikes_back.jpg"
+        }
+    },
+    {
+        "model": "cinema.movie",
+        "pk": 8,
+        "fields": {
+            "title": "Star Wars: Episode VI - Return of the Jedi",
+            "description": "The final showdown between the Rebels and the Empire.",
+            "price": "12.50",
+            "image": "https://example.com/star_wars_return_of_the_jedi.jpg"
+        }
+    },
+    {
+        "model": "cinema.session",
+        "pk": 1,
+        "fields": {
+            "movie": 1,
+            "date": "2023-07-25",
+            "time": "18:00:00",
+            "available_seats": 100
+        }
+    },
+    {
+        "model": "cinema.session",
+        "pk": 2,
+        "fields": {
+            "movie": 2,
+            "date": "2023-07-26",
+            "time": "19:30:00",
+            "available_seats": 120
+        }
+    },
+    {
+        "model": "cinema.session",
+        "pk": 3,
+        "fields": {
+            "movie": 3,
+            "date": "2023-08-10",
+            "time": "20:00:00",
+            "available_seats": 90
+        }
+    },
+    {
+        "model": "cinema.session",
+        "pk": 4,
+        "fields": {
+            "movie": 4,
+            "date": "2023-08-20",
+            "time": "21:00:00",
+            "available_seats": 150
+        }
+    },
+    {
+        "model": "cinema.session",
+        "pk": 5,
+        "fields": {
+            "movie": 5,
+            "date": "2023-08-21",
+            "time": "18:30:00",
+            "available_seats": 100
+        }
+    },
+    {
+        "model": "cinema.session",
+        "pk": 6,
+        "fields": {
+            "movie": 6,
+            "date": "2023-08-22",
+            "time": "19:00:00",
+            "available_seats": 120
+        }
+    },
+    {
+        "model": "cinema.session",
+        "pk": 4,
+        "fields": {
+            "movie": 4,
+            "date": "2023-08-20",
+            "time": "21:00:00",
+            "available_seats": 150
+        }
+    },
+    {
+        "model": "cinema.session",
+        "pk": 5,
+        "fields": {
+            "movie": 5,
+            "date": "2023-08-21",
+            "time": "18:30:00",
+            "available_seats": 100
+        }
+    },
+    {
+        "model": "cinema.session",
+        "pk": 6,
+        "fields": {
+            "movie": 6,
+            "date": "2023-08-22",
+            "time": "19:00:00",
+            "available_seats": 120
+        }
+    }
+]

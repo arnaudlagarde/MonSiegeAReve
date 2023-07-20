@@ -1,0 +1,62 @@
+[
+    {
+        "model": "cinema.movie",
+        "pk": 9,
+        "fields": {
+            "title": "The Lord of the Rings: The Fellowship of the Ring",
+            "description": "A young hobbit named Frodo sets out on a quest to destroy the One Ring and save Middle-earth.",
+            "price": "12.50",
+            "image": "https://example.com/lotr_fellowship_of_the_ring.jpg"
+        }
+    },
+    {
+        "model": "cinema.movie",
+        "pk": 10,
+        "fields": {
+            "title": "The Lord of the Rings: The Two Towers",
+            "description": "Frodo continues his journey to Mount Doom while a divided fellowship faces new challenges.",
+            "price": "12.50",
+            "image": "https://example.com/lotr_two_towers.jpg"
+        }
+    },
+    {
+        "model": "cinema.movie",
+        "pk": 11,
+        "fields": {
+            "title": "The Lord of the Rings: The Return of the King",
+            "description": "The final battle for Middle-earth as Frodo and Sam reach Mount Doom.",
+            "price": "12.50",
+            "image": "https://example.com/lotr_return_of_the_king.jpg"
+        }
+    },
+    {
+        "model": "cinema.session",
+        "pk": 7,
+        "fields": {
+            "movie": 9,
+            "date": "2023-08-25",
+            "time": "18:30:00",
+            "available_seats": 120
+        }
+    },
+    {
+        "model": "cinema.session",
+        "pk": 8,
+        "fields": {
+            "movie": 10,
+            "date": "2023-08-26",
+            "time": "19:00:00",
+            "available_seats": 100
+        }
+    },
+    {
+        "model": "cinema.session",
+        "pk": 9,
+        "fields": {
+            "movie": 11,
+            "date": "2023-08-27",
+            "time": "20:00:00",
+            "available_seats": 150
+        }
+    }
+]
