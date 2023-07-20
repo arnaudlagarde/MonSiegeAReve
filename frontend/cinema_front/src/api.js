@@ -43,6 +43,25 @@ export const fetchMovieSessions = async () => {
     }
 };
 
+export const fetchMovies = async () => {
+    try {
+        const response = await axios.get(BASE_URL + '/api/movies/');
+        const moviesData = response.data;
+
+        // Modify the image URLs to include the full path of your Django backend
+        const updatedMoviesData = moviesData.map((movie) => ({
+            ...movie,
+            image: BASE_URL + movie.image, // Assuming movie.image contains the relative URL, adjust it if needed
+        }));
+
+        return updatedMoviesData;
+    } catch (error) {
+        console.error('Error fetching movies:', error);
+        throw error;
+    }
+};
+
+
 // Export Axios instance to be used throughout the app
 export default axios.create({
     baseURL: BASE_URL,

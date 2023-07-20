@@ -1,8 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import popcornImage from '../assets/popcorn.jpg'; // Import your popcorn image (adjust the path accordingly)
+import popcornImage from '../assets/popcorn.jpg';
+import { fetchMovies } from '../api'; // Import the fetchMovies function from api.js
 
 const Home = () => {
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Fetch movies from your Django API
+    const fetchMoviesData = async () => {
+      try {
+        const moviesData = await fetchMovies();
+        setMovies(moviesData);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchMoviesData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <Container>
@@ -26,61 +50,23 @@ const Home = () => {
         </Row>
         <hr className="my-4" />
         <h2 className="my-4">Our Movies</h2>
-        {/* Add a carousel or grid to display featured movies */}
-        {/* For example, you can use Bootstrap's Carousel component or create a custom movie grid */}
         <Row>
-          <Col md={4} className="mb-4">
-            <div className="border p-3 h-100 d-flex flex-column justify-content-between">
-              <h4>Movie 1</h4>
-              <p>Description of Movie 1</p>
-              <Button variant="primary" href="/movies/1">
-                Learn More
-              </Button>
-            </div>
-          </Col>
-          <Col md={4} className="mb-4">
-            <div className="border p-3 h-100 d-flex flex-column justify-content-between">
-              <h4>Movie 2</h4>
-              <p>Description of Movie 2</p>
-              <Button variant="primary" href="/movies/2">
-                Learn More
-              </Button>
-            </div>
-          </Col>
-          <Col md={4} className="mb-4">
-            <div className="border p-3 h-100 d-flex flex-column justify-content-between">
-              <h4>Movie 3</h4>
-              <p>Description of Movie 3</p>
-              <Button variant="primary" href="/movies/3">
-                Learn More
-              </Button>
-            </div>
-          </Col>
+          {movies.map((movie) => (
+            <Col key={movie.id} md={4} className="mb-4">
+              <div className="border p-3 h-100 d-flex flex-column justify-content-between">
+                <h4>{movie.title}</h4>
+                {/* Display the movie image */}
+                <img src={movie.imageUrl} alt={movie.title} className="img-fluid rounded" />
+
+                <p>{movie.description}</p>
+                <Button variant="primary" href={`/movies/${movie.id}`}>
+                  Learn More
+                </Button>
+              </div>
+            </Col>
+          ))}
         </Row>
-        <hr className="my-4" />
-        <h2 className="my-4">Upcoming Movie Sessions</h2>
-        {/* Add a carousel or grid to display upcoming movie sessions */}
-        {/* For example, you can use Bootstrap's Carousel component or create a custom session grid */}
-        <Row>
-          <Col md={6} className="mb-4">
-            <div className="border p-3 h-100 d-flex flex-column justify-content-between">
-              <h4>Session 1</h4>
-              <p>Date and Time</p>
-              <Button variant="primary" href="/sessions/1">
-                Reserve Seats
-              </Button>
-            </div>
-          </Col>
-          <Col md={6} className="mb-4">
-            <div className="border p-3 h-100 d-flex flex-column justify-content-between">
-              <h4>Session 2</h4>
-              <p>Date and Time</p>
-              <Button variant="primary" href="/sessions/2">
-                Reserve Seats
-              </Button>
-            </div>
-          </Col>
-        </Row>
+        {/* ... Other content ... */}
       </Container>
     </div>
   );

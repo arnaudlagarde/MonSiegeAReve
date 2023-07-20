@@ -9,7 +9,7 @@ import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
 import MovieSessionsPage from './components/MovieSessionsPage';
 import MovieForm from './components/MovieForm';
-import axios, { getAuthToken, setAuthToken } from './api'; // Import setAuthToken as a named import
+import { getAuthToken, setAuthToken } from './api'; // Import setAuthToken as a named import
 
 const App = () => {
   useEffect(() => {
