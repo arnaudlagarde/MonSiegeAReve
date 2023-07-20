@@ -10,6 +10,7 @@ const Home = () => {
   useEffect(() => {
     // Fetch movies from your Django API
     const fetchMoviesData = async () => {
+      console.log(localStorage.getItem('is_staff') + ' ' + localStorage.getItem('username'));
       try {
         const moviesData = await fetchMovies();
         setMovies(moviesData);

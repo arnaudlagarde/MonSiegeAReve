@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import api from '../api';
+import api, {createReservation} from '../api';
 import { Form, Button, Row, Col, Container, Alert } from 'react-bootstrap';
 
 const Reservation = () => {
@@ -78,19 +78,20 @@ const Reservation = () => {
       setMessage('Veuillez sélectionner une séance');
       return;
     }
-
+  
     try {
-      const response = await api.post('/api/reserve/', {
-        session_id: selectedSession,
-        seats: seatsRequested,
-      });
-
-      setMessage(response.data.message);
+      // Appel de la fonction createReservation pour créer la réservation
+      const response = await createReservation(selectedSession, seatsRequested);
+      setMessage(response.message);
+  
+      // Rafraîchir les sessions et les sessions spéciales
       fetchSessions();
       fetchSpecialSessions();
+      // Récupérer les sièges restants pour la session sélectionnée
+      console.log('yes bb');
       fetchRemainingSeats(selectedSession);
     } catch (error) {
-      setMessage('Impossible de réserver des places. Vérifiez les places disponibles.');
+      setMessage(error.message);
     }
   };
 

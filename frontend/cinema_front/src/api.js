@@ -85,6 +85,21 @@ export const postMovieWithImage = async (movieData) => {
     }
 };
 
+// Fonction pour créer une réservation
+export const createReservation = async (session_id, seats) => {
+    try {
+      const response = await axios.post(BASE_URL + '/api/reserve/', {
+        session_id: session_id,
+        seats: seats,
+      });
+    
+      return response.data;
+    } catch (error) {
+      throw new Error('Impossible de créer la réservation. Vérifiez les places disponibles.');
+    }
+  };
+  
+
 // Export Axios instance to be used throughout the app
 export default axios.create({
     baseURL: BASE_URL,
