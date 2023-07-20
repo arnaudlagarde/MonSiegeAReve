@@ -6,6 +6,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 const CustomNavbar = () => {
     const authToken = localStorage.getItem('authToken'); // Get the authentication token from localStorage
+    const isAdmin = localStorage.getItem('is_staff'); // Get the admin status from localStorage
 
     const handleLogout = () => {
         console.log('handlelogout de navbar');
@@ -27,15 +28,19 @@ const CustomNavbar = () => {
                     <Nav.Link as={Link} to="/">
                         Accueil
                     </Nav.Link>
-                    <Nav.Link as={Link} to="/reservation">
-                        Réserver des places
-                    </Nav.Link>
+                    {authToken && ( // Show the following link only when the user is logged in
+                        <Nav.Link as={Link} to="/reservation">
+                            Réserver des places
+                        </Nav.Link>
+                    )}
                     <Nav.Link as={Link} to="/moviesessions">
                         Movie Sessions
                     </Nav.Link>
-                    <Nav.Link as={Link} to="/add-movie">
-                        Ajouter un film
-                    </Nav.Link>
+                    {isAdmin === 'true' && (
+                        <Nav.Link as={Link} to="/add-movie">
+                            Ajouter un film
+                        </Nav.Link>
+                    )}
                 </Nav>
                 <Nav>
                     {!authToken ? (

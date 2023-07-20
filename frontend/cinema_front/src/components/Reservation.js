@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import api from '../api'; // Import api.js
+import api from '../api';
 import { Form, Button, Row, Col, Container, Alert } from 'react-bootstrap';
 
 const Reservation = () => {
@@ -9,7 +9,7 @@ const Reservation = () => {
   const [selectedSession, setSelectedSession] = useState('');
   const [seatsRequested, setSeatsRequested] = useState(1);
   const [message, setMessage] = useState('');
-  const [moviesData, setMoviesData] = useState([]); // State to store the movie data associated with each session
+  const [moviesData, setMoviesData] = useState([]);
 
   const fetchMoviesData = useCallback(async () => {
     try {
@@ -25,7 +25,6 @@ const Reservation = () => {
     }
   }, [sessions, movies]);
 
-
   useEffect(() => {
     fetchMovies();
     fetchSessions();
@@ -35,17 +34,16 @@ const Reservation = () => {
 
   const fetchMovies = async () => {
     try {
-      const response = await api.get('/api/movies/'); // Use api.get instead of axios.get
+      const response = await api.get('/api/movies/');
       setMovies(response.data);
     } catch (error) {
       console.error('Error fetching movies:', error);
     }
   };
 
-
   const fetchSessions = async () => {
     try {
-      const response = await api.get('/api/sessions/'); // Use api.get instead of axios.get
+      const response = await api.get('/api/sessions/');
       setSessions(response.data);
     } catch (error) {
       console.error('Error fetching regular sessions:', error);
@@ -54,7 +52,7 @@ const Reservation = () => {
 
   const fetchSpecialSessions = async () => {
     try {
-      const response = await api.get('/api/special_sessions/'); // Use api.get instead of axios.get
+      const response = await api.get('/api/special_sessions/');
       setSpecialSessions(response.data);
     } catch (error) {
       console.error('Error fetching special sessions:', error);
@@ -63,37 +61,35 @@ const Reservation = () => {
 
   const handleReservation = async () => {
     if (!selectedSession) {
-      setMessage('Please select a session');
+      setMessage('Veuillez sélectionner une séance');
       return;
     }
 
     try {
-      const response = await api.post('/api/reserve/', { // Use api.post instead of axios.post
+      const response = await api.post('/api/reserve/', {
         session_id: selectedSession,
         seats: seatsRequested,
       });
 
       setMessage(response.data.message);
-      // Refresh sessions after a successful reservation
       fetchSessions();
       fetchSpecialSessions();
     } catch (error) {
-      setMessage('Unable to reserve seats. Check available seats.');
+      setMessage('Impossible de réserver des places. Vérifiez les places disponibles.');
     }
   };
 
   return (
-    <Container>
-      <h2>Reserve Seats</h2>
+    <Container className="mt-4">
+      <h2>Réserver des places</h2>
       <Row>
         <Col sm={6}>
           <Form.Group>
-            <Form.Label>Select a session:</Form.Label>
+            <Form.Label>Sélectionnez une séance :</Form.Label>
             <Form.Control as="select" onChange={(e) => setSelectedSession(e.target.value)}>
-              <option value="">Choose a session</option>
+              <option value="">Choisir une séance</option>
               {sessions.map((session, index) => (
                 <option key={session.id} value={session.id}>
-                  {/* Use moviesData[index] to access the movie title */}
                   {moviesData[index]} - {session.date} {session.time}
                 </option>
               ))}
@@ -105,7 +101,7 @@ const Reservation = () => {
             </Form.Control>
           </Form.Group>
           <Form.Group>
-            <Form.Label>Number of seats:</Form.Label>
+            <Form.Label>Nombre de places :</Form.Label>
             <Form.Control
               type="number"
               min="1"
@@ -114,9 +110,9 @@ const Reservation = () => {
             />
           </Form.Group>
           <Button variant="primary" onClick={handleReservation}>
-            Reserve
+            Réserver
           </Button>
-          {message && <Alert variant="info">{message}</Alert>}
+          {message && <Alert variant="info" className="mt-3">{message}</Alert>}
         </Col>
       </Row>
     </Container>
