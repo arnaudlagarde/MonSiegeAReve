@@ -10,6 +10,8 @@ const CustomNavbar = () => {
         console.log('handlelogout de navbar');
         // Remove the authToken from localStorage to simulate logging out
         localStorage.removeItem('authToken');
+        localStorage.removeItem('username');
+        localStorage.removeItem('is_staff');
         window.location.reload();
       };
     
