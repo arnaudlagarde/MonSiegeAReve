@@ -46,53 +46,65 @@ const MovieForm = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       <h2>Add a New Movie</h2>
       <form onSubmit={handleSubmit}>
-        <label>
-          Title:
+        <div className="mb-3">
+          <label htmlFor="title" className="form-label">
+            Title:
+          </label>
           <input
             type="text"
+            id="title"
             name="title"
             value={formData.title}
             onChange={handleChange}
+            className="form-control"
             required
           />
-        </label>
-        <br />
-        <label>
-          Description:
+        </div>
+        <div className="mb-3">
+          <label htmlFor="description" className="form-label">
+            Description:
+          </label>
           <textarea
+            id="description"
             name="description"
             value={formData.description}
             onChange={handleChange}
+            className="form-control"
           />
-        </label>
-        <br />
-        <label>
-          Price:
+        </div>
+        <div className="mb-3">
+          <label htmlFor="price" className="form-label">
+            Price:
+          </label>
           <input
             type="number"
+            id="price"
             name="price"
             value={formData.price}
             onChange={handleChange}
+            className="form-control"
             required
           />
-        </label>
-        <br />
-        <label>
-          Image:
+        </div>
+        <div className="mb-3">
+          <label htmlFor="image" className="form-label">
+            Image:
+          </label>
           <input
             type="file"
+            id="image"
             name="image"
             onChange={handleImageChange}
+            className="form-control"
           />
-        </label>
-        <br />
-        <label>
-          Special:
+        </div>
+        <div className="form-check mb-3">
           <input
             type="checkbox"
+            id="special"
             name="special"
             checked={formData.special}
             onChange={(e) =>
@@ -101,10 +113,15 @@ const MovieForm = () => {
                 special: e.target.checked,
               })
             }
+            className="form-check-input"
           />
-        </label>
-        <br />
-        <button type="submit">Submit</button>
+          <label htmlFor="special" className="form-check-label">
+            Special
+          </label>
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
       </form>
     </div>
   );
