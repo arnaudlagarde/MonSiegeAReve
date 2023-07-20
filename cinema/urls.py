@@ -2,6 +2,8 @@ from django.urls import path
 from . import views
 from .views import MovieAPIView, SessionAPIView, SpecialSessionAPIView, user_create, reserve_seat
 from rest_framework.authtoken.views import obtain_auth_token  # Import token view
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('api/movies/', MovieAPIView.as_view(), name='movies-list'),
@@ -18,3 +20,7 @@ urlpatterns = [
     path('api/user/', views.get_user, name='get-user'),
     path('api/csrf/', views.get_csrf_token, name='get_csrf_token'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

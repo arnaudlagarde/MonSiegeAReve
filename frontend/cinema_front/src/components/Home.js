@@ -56,7 +56,7 @@ const Home = () => {
               <div className="border p-3 h-100 d-flex flex-column justify-content-between">
                 <h4>{movie.title}</h4>
                 {/* Display the movie image */}
-                <img src={movie.imageUrl} alt={movie.title} className="img-fluid rounded" />
+                <img src={movie.image} alt={movie.title} className="img-fluid rounded" />
 
                 <p>{movie.description}</p>
                 <Button variant="primary" href={`/movies/${movie.id}`}>
