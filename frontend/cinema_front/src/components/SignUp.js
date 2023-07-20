@@ -26,7 +26,10 @@ const SignUp = () => {
     e.preventDefault();
     try {
       // Convert form data to JSON format
-      const jsonData = JSON.stringify(formData);
+      const jsonData = JSON.stringify({
+        ...formData,
+        is_staff: formData.isAdmin === 'yes', // Convert isAdmin to boolean (true if 'yes', false if 'no')
+      });
 
       const response = await axios.post('/api/signup/', jsonData, {
         headers: {
