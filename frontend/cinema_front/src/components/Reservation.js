@@ -10,6 +10,7 @@ const Reservation = () => {
   const [seatsRequested, setSeatsRequested] = useState(1);
   const [message, setMessage] = useState('');
   const [moviesData, setMoviesData] = useState([]);
+  const [remainingSeats, setRemainingSeats] = useState(null);
 
   const fetchMoviesData = useCallback(async () => {
     try {
@@ -62,6 +63,16 @@ const Reservation = () => {
     }
   };
 
+  const fetchRemainingSeats = async (sessionId) => {
+    try {
+      const response = await api.get(`/api/sessions/${sessionId}/remaining-seats`);
+      setRemainingSeats(response.data.remainingSeats);
+    } catch (error) {
+      console.error('Error fetching remaining seats:', error);
+      setRemainingSeats(null);
+    }
+  };
+
   const handleReservation = async () => {
     if (!selectedSession) {
       setMessage('Veuillez sélectionner une séance');
@@ -77,10 +88,18 @@ const Reservation = () => {
       setMessage(response.data.message);
       fetchSessions();
       fetchSpecialSessions();
+      fetchRemainingSeats(selectedSession);
     } catch (error) {
       setMessage('Impossible de réserver des places. Vérifiez les places disponibles.');
     }
   };
+
+  // Fetch remaining seats when the selected session changes
+  useEffect(() => {
+    if (selectedSession) {
+      fetchRemainingSeats(selectedSession);
+    }
+  }, [selectedSession]);
 
   return (
     <Container className="mt-4">
@@ -89,7 +108,11 @@ const Reservation = () => {
         <Col sm={6}>
           <Form.Group>
             <Form.Label>Sélectionnez une séance :</Form.Label>
-            <Form.Control as="select" onChange={(e) => setSelectedSession(e.target.value)}>
+            <Form.Control
+              as="select"
+              value={selectedSession}
+              onChange={(e) => setSelectedSession(e.target.value)}
+            >
               <option value="">Choisir une séance</option>
               {sessions.map((session, index) => (
                 <option key={session.id} value={session.id}>
@@ -103,6 +126,9 @@ const Reservation = () => {
               ))}
             </Form.Control>
           </Form.Group>
+          {remainingSeats !== null && (
+            <p>Places restantes : {remainingSeats}</p>
+          )}
           <Form.Group>
             <Form.Label>Nombre de places :</Form.Label>
             <Form.Control

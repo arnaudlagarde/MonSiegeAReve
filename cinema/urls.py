@@ -6,6 +6,8 @@ from rest_framework.authtoken.views import obtain_auth_token  # Import token vie
 urlpatterns = [
     path('api/movies/', MovieAPIView.as_view(), name='movies-list'),
     path('api/sessions/', SessionAPIView.as_view(), name='sessions-list'),
+    path('api/sessions/<int:session_id>/remaining-seats/',
+         views.get_remaining_seats, name='get_remaining_seats'),
     path('api/special_sessions/', SpecialSessionAPIView.as_view(),
          name='special-sessions-list'),
     path('api/reserve/', reserve_seat, name='reserve-seat'),

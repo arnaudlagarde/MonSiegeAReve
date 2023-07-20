@@ -61,7 +61,6 @@ export const fetchMovies = async () => {
     }
 };
 
-
 // Export Axios instance to be used throughout the app
 export default axios.create({
     baseURL: BASE_URL,

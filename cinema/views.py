@@ -2,7 +2,7 @@ from rest_framework.generics import CreateAPIView
 from django.contrib.auth.models import User
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.decorators import api_view,authentication_classes, permission_classes
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import Movie, Session, SpecialSession, Reservation
 from .serializers import MovieSerializer, SessionSerializer, SpecialSessionSerializer, ReservationSerializer, UserSerializer
@@ -20,16 +20,25 @@ def get_csrf_token(request):
     return JsonResponse({'csrfToken': csrf_token})
 
 
-class MovieAPIView(APIView):
-    #temporaire pour les tests, besoin du token d'authentification autrement, à retirer après les tests
-    permission_classes = [AllowAny]
+@api_view(['GET'])
+def get_remaining_seats(request, session_id):
+    try:
+        session = Session.objects.get(pk=session_id)
+        remaining_seats = session.available_seats
+        return Response({'remainingSeats': remaining_seats})
+    except Session.DoesNotExist:
+        return Response({'error': 'Session not found'}, status=404)
 
+
+class MovieAPIView(APIView):
+    # temporaire pour les tests, besoin du token d'authentification autrement, à retirer après les tests
+    permission_classes = [AllowAny]
 
     def get(self, request):
         movies = Movie.objects.all()
         serializer = MovieSerializer(movies, many=True)
         return Response(serializer.data)
-    
+
     def post(self, request):
         serializer = MovieSerializer(data=request.data)
         if serializer.is_valid():
@@ -46,7 +55,7 @@ class SessionAPIView(APIView):
         sessions = Session.objects.all()
         serializer = SessionSerializer(sessions, many=True)
         return Response(serializer.data)
-    
+
     def post(self, request):
         serializer = SessionSerializer(data=request.data)
         if serializer.is_valid():
@@ -56,9 +65,9 @@ class SessionAPIView(APIView):
 
 
 class SpecialSessionAPIView(APIView):
-     # Allow any (unauthenticated) user to access the session list
+    # Allow any (unauthenticated) user to access the session list
     permission_classes = [AllowAny]
-    
+
     def get(self, request):
         special_sessions = SpecialSession.objects.all()
         serializer = SpecialSessionSerializer(special_sessions, many=True)
@@ -92,6 +101,7 @@ def user_create(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
