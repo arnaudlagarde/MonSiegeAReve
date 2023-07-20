@@ -30,7 +30,22 @@ const MovieForm = () => {
     e.preventDefault();
 
     try {
-      const response = await api.post('/api/movies/', formData);
+      const formDataToSend = new FormData();
+      formDataToSend.append('title', formData.title);
+      formDataToSend.append('description', formData.description);
+      formDataToSend.append('price', formData.price);
+      formDataToSend.append('special', formData.special);
+
+      // Check if an image is selected before appending it to the FormData
+      if (formData.image) {
+        formDataToSend.append('image', formData.image, formData.image.name);
+      }
+
+      const response = await api.post('/api/movies/', formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       console.log(response.data);
       // Clear the form fields after successful submission
       setFormData({
@@ -44,6 +59,7 @@ const MovieForm = () => {
       console.error(error);
     }
   };
+
 
   return (
     <div className="container">

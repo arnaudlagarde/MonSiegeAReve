@@ -30,13 +30,13 @@ const Home = () => {
   return (
     <div>
       <Container>
-        <h1 className="my-4">Welcome to "Mon Siège à Rêve" Cinema</h1>
+        <h1 className="my-4">Mon Siège à Rêve</h1>
         <Row>
           <Col md={6} className="my-4">
             <img src={popcornImage} alt="Popcorn" className="img-fluid rounded" />
           </Col>
           <Col md={6} className="my-4">
-            <h2>About Our Cinema</h2>
+            <h2>Notre Cinema</h2>
             <p>
               Vivez l'expérience cinéma ultime au cinéma Mon Siège à Rêve ! Confort, immersion, soirées à thème... Réservez vos sièges dès maintenant !
             </p>
@@ -46,7 +46,7 @@ const Home = () => {
           </Col>
         </Row>
         <hr className="my-4" />
-        <h2 className="my-4">Our Movies</h2>
+        <h2 className="my-4">Nos films</h2>
         <Row>
           {movies.map((movie) => (
             <Col key={movie.id} md={4} className="mb-4">

@@ -61,6 +61,30 @@ export const fetchMovies = async () => {
     }
 };
 
+// Function to post movie data along with an image
+export const postMovieWithImage = async (movieData) => {
+    try {
+        // Create a new FormData object to handle file uploads
+        const formDataObject = new FormData();
+        formDataObject.append('title', movieData.title);
+        formDataObject.append('description', movieData.description);
+        formDataObject.append('price', movieData.price);
+        formDataObject.append('image', movieData.image); // Append the image file
+        formDataObject.append('special', movieData.special);
+
+        const response = await axios.post(BASE_URL + '/api/movies/', formDataObject, {
+            headers: {
+                'Content-Type': 'multipart/form-data', // Set the correct content type for file upload
+            },
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error('Error posting movie data:', error);
+        throw error;
+    }
+};
+
 // Export Axios instance to be used throughout the app
 export default axios.create({
     baseURL: BASE_URL,
