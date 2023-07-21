@@ -36,7 +36,7 @@ const MovieForm = () => {
       formDataToSend.append('price', formData.price);
       formDataToSend.append('special', formData.special);
 
-      // Check if an image is selected before appending it to the FormData
+      // Vérifier si une image est sélectionnée avant de l'ajouter au FormData
       if (formData.image) {
         formDataToSend.append('image', formData.image, formData.image.name);
       }
@@ -47,7 +47,7 @@ const MovieForm = () => {
         },
       });
       console.log(response.data);
-      // Clear the form fields after successful submission
+      // Effacer les champs du formulaire après la soumission réussie
       setFormData({
         title: '',
         description: '',
@@ -63,11 +63,11 @@ const MovieForm = () => {
 
   return (
     <div className="container">
-      <h2>Add a New Movie</h2>
+      <h2>Ajouter un nouveau film</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="title" className="form-label">
-            Title:
+            Titre :
           </label>
           <input
             type="text"
@@ -81,7 +81,7 @@ const MovieForm = () => {
         </div>
         <div className="mb-3">
           <label htmlFor="description" className="form-label">
-            Description:
+            Description :
           </label>
           <textarea
             id="description"
@@ -93,7 +93,7 @@ const MovieForm = () => {
         </div>
         <div className="mb-3">
           <label htmlFor="price" className="form-label">
-            Price:
+            Prix :
           </label>
           <input
             type="number"
@@ -107,7 +107,7 @@ const MovieForm = () => {
         </div>
         <div className="mb-3">
           <label htmlFor="image" className="form-label">
-            Image:
+            Image :
           </label>
           <input
             type="file"
@@ -132,11 +132,11 @@ const MovieForm = () => {
             className="form-check-input"
           />
           <label htmlFor="special" className="form-check-label">
-            Special
+            Spécial
           </label>
         </div>
         <button type="submit" className="btn btn-primary">
-          Submit
+          Ajouter un film
         </button>
       </form>
     </div>
