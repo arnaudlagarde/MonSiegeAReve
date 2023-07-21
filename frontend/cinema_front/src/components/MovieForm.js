@@ -10,6 +10,9 @@ const MovieForm = () => {
     special: false,
   });
 
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -46,7 +49,7 @@ const MovieForm = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log(response.data);
+
       // Effacer les champs du formulaire après la soumission réussie
       setFormData({
         title: '',
@@ -55,15 +58,40 @@ const MovieForm = () => {
         image: null,
         special: false,
       });
+
+      // Afficher le message de succès
+      setSuccessMessage('Le film a été ajouté avec succès !');
+
+      // Effacer le message de succès après quelques secondes
+      setTimeout(() => {
+        setSuccessMessage('');
+      }, 3000);
     } catch (error) {
       console.error(error);
+
+      // Afficher le message d'erreur
+      setErrorMessage('Une erreur s\'est produite lors de l\'ajout du film.');
+
+      // Effacer le message d'erreur après quelques secondes
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 3000);
     }
   };
-
 
   return (
     <div className="container">
       <h2>Ajouter un nouveau film</h2>
+      {successMessage && (
+        <div className="alert alert-success" role="alert">
+          {successMessage}
+        </div>
+      )}
+      {errorMessage && (
+        <div className="alert alert-danger" role="alert">
+          {errorMessage}
+        </div>
+      )}
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="title" className="form-label">
