@@ -88,17 +88,29 @@ export const postMovieWithImage = async (movieData) => {
 // Fonction pour créer une réservation
 export const createReservation = async (session_id, seats) => {
     try {
-      const response = await axios.post(BASE_URL + '/api/reserve/', {
-        session_id: session_id,
-        seats: seats,
-      });
-    
-      return response.data;
+        const response = await axios.post(BASE_URL + '/api/reserve/', {
+            session_id: session_id,
+            seats: seats,
+        });
+
+        return response.data;
     } catch (error) {
-      throw new Error('Impossible de créer la réservation. Vérifiez les places disponibles.');
+        throw new Error('Impossible de créer la réservation. Vérifiez les places disponibles.');
     }
-  };
-  
+};
+
+// Function to fetch the purchase history from Django
+export const fetchPurchaseHistory = async () => {
+    try {
+        const response = await axios.get(BASE_URL + '/api/purchase-history/'); // Replace 'purchase-history' with the actual URL for fetching purchase history
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching purchase history:', error);
+        throw error;
+    }
+};
+
+
 
 // Export Axios instance to be used throughout the app
 export default axios.create({

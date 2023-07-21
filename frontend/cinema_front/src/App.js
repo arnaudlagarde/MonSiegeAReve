@@ -7,6 +7,7 @@ import Home from './components/Home';
 import Reservation from './components/Reservation';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
+import PurchaseHistory from './components/PurchaseHistory';
 import MovieSessionsPage from './components/MovieSessionsPage';
 import MovieForm from './components/MovieForm';
 import { getAuthToken, setAuthToken } from './api'; // Import setAuthToken as a named import
@@ -32,6 +33,7 @@ const App = () => {
             <Route path="/signin" element={<SignIn />} />
             <Route path="/moviesessions" element={<MovieSessionsPage />} />
             <Route path="/add-movie" element={<MovieForm />} />
+            <Route path="/purchase-history" element={<PurchaseHistory />} />
           </Routes>
         </Container>
       </div>

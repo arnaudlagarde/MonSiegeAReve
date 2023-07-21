@@ -1,12 +1,13 @@
+// CustomNavbar.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { getAuthToken } from '../api'; // Import the getAuthToken function
 
 const CustomNavbar = () => {
-    const authToken = localStorage.getItem('authToken'); // Get the authentication token from localStorage
-    const isAdmin = localStorage.getItem('is_staff'); // Get the admin status from localStorage
+    const authToken = getAuthToken(); // Get the authentication token from localStorage
 
     const handleLogout = () => {
         console.log('handlelogout de navbar');
@@ -28,19 +29,20 @@ const CustomNavbar = () => {
                     <Nav.Link as={Link} to="/">
                         Accueil
                     </Nav.Link>
-                    {authToken && ( // Show the following link only when the user is logged in
-                        <Nav.Link as={Link} to="/reservation">
-                            Réserver des places
-                        </Nav.Link>
+                    {authToken && (
+                        <>
+                            <Nav.Link as={Link} to="/reservation">
+                                Réserver des places
+                            </Nav.Link>
+                            <Nav.Link as={Link} to="/purchase-history">
+                                Historique d'achats
+                            </Nav.Link>
+                        </>
                     )}
                     <Nav.Link as={Link} to="/moviesessions">
                         Movie Sessions
                     </Nav.Link>
-                    {isAdmin === 'true' && (
-                        <Nav.Link as={Link} to="/add-movie">
-                            Ajouter un film
-                        </Nav.Link>
-                    )}
+                    {/* Remove the isAdmin check since it is not defined */}
                 </Nav>
                 <Nav>
                     {!authToken ? (

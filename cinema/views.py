@@ -13,6 +13,18 @@ from django.middleware.csrf import get_token
 from rest_framework.authentication import TokenAuthentication
 
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_purchase_history(request):
+    try:
+        # Retrieve the purchase history for the authenticated user
+        reservations = Reservation.objects.filter(user=request.user)
+        serializer = ReservationSerializer(reservations, many=True)
+        return Response(serializer.data)
+    except Exception as e:
+        return Response({'error': str(e)}, status=400)
+
+
 def get_csrf_token(request):
     # Fetch the CSRF token using the get_token function
     csrf_token = get_token(request)
